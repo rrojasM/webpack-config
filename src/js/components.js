@@ -3,8 +3,8 @@ import { Todo } from "../classes";
 
 //REFERENCIA
 const divTodoList = document.querySelector('.todo-list');
-const txtInput = document.querySelector('.new-todo')
-
+const txtInput = document.querySelector('.new-todo');
+const borrarCompletados = document.querySelector('.clear-completed');
 
 export const crearTodoHTML = (todo) => {
     const HTMLtodo = `
@@ -38,8 +38,7 @@ txtInput.addEventListener('keyup', (event) => {
 
         event.target.value = '';
     }
-})
-
+});
 
 divTodoList.addEventListener('click', (event) => {
     const nombreElemento = event.target.localName;
@@ -55,4 +54,17 @@ divTodoList.addEventListener('click', (event) => {
     }
 
     console.log(todoList);
-})
+});
+
+
+borrarCompletados.addEventListener('click', () => {
+    todoList.eliminarCompletados();
+
+    for (let i = divTodoList.children.length - 1; i >= 0; i--) {
+        const element = divTodoList.children[i];
+
+        if(element.classList.contains('completed')){
+            divTodoList.removeChild(element);
+        }
+    }
+});
