@@ -3,7 +3,6 @@ import { Todo } from "../classes";
 
 //REFERENCIA
 const divTodoList = document.querySelector('.todo-list');
-
 const txtInput = document.querySelector('.new-todo')
 
 
@@ -32,15 +31,28 @@ export const crearTodoHTML = (todo) => {
 
 txtInput.addEventListener('keyup', (event) => {
     //console.log(event);
-
-
     if (event.keyCode === 13 && event.target.value.length > 0) {
         const nuevoTodo = new Todo(event.target.value);
         todoList.nuevoTodo(nuevoTodo);
         crearTodoHTML(nuevoTodo);
 
         event.target.value = '';
-    } else {
-
     }
+})
+
+
+divTodoList.addEventListener('click', (event) => {
+    const nombreElemento = event.target.localName;
+    const todoElemento = event.target.parentElement.parentElement;
+    const todoId = todoElemento.getAttribute('data-id');
+
+    if (nombreElemento.includes('input')) {
+        todoList.marcarCompletado(todoId);
+        todoElemento.classList.toggle('completed')
+    } else if (nombreElemento.includes('button')) {
+        todoList.eliminarTodo(todoId);
+        divTodoList.removeChild(todoElemento);
+    }
+
+    console.log(todoList);
 })
