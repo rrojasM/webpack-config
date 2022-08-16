@@ -1,7 +1,12 @@
-import { saludar } from './js/componentes.js';
 import './styles.css';
+/* import { Todo } from './classes/todo.class';
+import { TodoList } from './classes/todo-list.class'; */
 
+import { Todo, TodoList } from './classes'
+const todoList = new TodoList();
+const tarea = new Todo('Aprender Javascript');
 
-const nombre = 'Fernando';
+todoList.nuevoTodo(tarea);
 
-saludar( nombre );
+console.log(tarea);
+console.log(todoList);
