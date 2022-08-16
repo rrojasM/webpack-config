@@ -6,7 +6,7 @@ const divTodoList = document.querySelector('.todo-list');
 const txtInput = document.querySelector('.new-todo');
 const borrarCompletados = document.querySelector('.clear-completed');
 const filtros = document.querySelector('.filters');
-const filt = document.querySelectorAll('filtro');
+const filt = document.querySelectorAll('.filtro');
 
 
 export const crearTodoHTML = (todo) => {
@@ -20,15 +20,12 @@ export const crearTodoHTML = (todo) => {
             <input class="edit" value="Create a TodoMVC template">
         </li>
     `
-
     const div = document.createElement('div');
     div.innerHTML = HTMLtodo;
 
     divTodoList.append(div.firstElementChild);
 
-
     return div;
-
 }
 
 
@@ -38,7 +35,6 @@ txtInput.addEventListener('keyup', (event) => {
         const nuevoTodo = new Todo(event.target.value);
         todoList.nuevoTodo(nuevoTodo);
         crearTodoHTML(nuevoTodo);
-
         event.target.value = '';
     }
 });
@@ -55,8 +51,6 @@ divTodoList.addEventListener('click', (event) => {
         todoList.eliminarTodo(todoId);
         divTodoList.removeChild(todoElemento);
     }
-
-    console.log(todoList);
 });
 
 
@@ -81,26 +75,24 @@ filtros.addEventListener('click', (event) => {
 
     filt.forEach(element => element.classList.remove('selected'));
     event.target.classList.add('selected');
-    
+
     for (const element of divTodoList.children) {
         element.classList.remove('.hidden');
         const completado = element.classList.contains('completed');
 
 
         switch (filtro) {
+
             case 'Pendientes':
                 if (completado) {
-                    element.classList.add('hidden')
+                    element.classList.add('hidden');
                 }
                 break;
 
             case 'Completados':
-
                 if (!completado) {
-                    element.classList.add('hidden')
+                    element.classList.add('hidden');
                 }
-                break;
-            default:
                 break;
         }
     }
